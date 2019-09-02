@@ -1,1 +1,2 @@
-Intro_Intent_Classification
+# Intent_Classification
+An intent classifier which can classifies a query into one of the 21 given intents.
