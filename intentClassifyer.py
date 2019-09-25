@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
-"""
-Spyder Editor
 
-This is a temporary script file.
-"""
-
+#Import Needed things
 import numpy as np
 import pandas as pd
 from nltk.corpus import stopwords
@@ -21,6 +17,9 @@ from keras.models import Sequential, load_model
 from keras.layers import Dense, LSTM, Bidirectional, Embedding, Dropout
 from keras.callbacks import ModelCheckpoint
 
+
+#Function to load data set
+#Extracting Fields Sentence, and Intent
 def load_dataset(filename):
   df = pd.read_csv(filename, encoding = "latin1", names = ["Sentence", "Intent"])
   print(df.head())
@@ -30,16 +29,22 @@ def load_dataset(filename):
   
   return (intent, unique_intent, sentences)
   
-
+#loading dataset named "Dataset.csv"
 intent, unique_intent, sentences = load_dataset("Dataset.csv")
 
-#print(sentences[:5])
+#Print First 5 sentences 
+print(sentences[:5])
 
+#DOwnloading some needed packages. SHoudl already have them
 nltk.download("stopwords")
 nltk.download("punkt")
 
 stemmer = LancasterStemmer()
 
+
+#Cleaning data by removing things like puncuation and special characters
+#secondly we lemmatiz them. THe process of changing all similar words to the
+#same word i.e churches -> church
 def cleaning(sentences):
   words = []
   for s in sentences:
@@ -147,6 +152,8 @@ def predictions(text):
   
   pred = model.predict_classes(x)
   return pred
+
+
 
 def get_final_output(pred, classes):
   predictions = pred[0]
